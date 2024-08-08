@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm276lgpyxn53"]
+
+[ext_resource type="Texture2D" uid="uid://b5wqfua3r2xv6" path="res://icon.svg" id="1_ngt8e"]
+[ext_resource type="Script" path="res://scripts/album.gd" id="1_sa3u4"]
+
+[node name="Album" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sa3u4")
+metadata/_edit_lock_ = true
+
+[node name="LeftButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -23.0
+offset_right = 56.0
+offset_bottom = 17.0
+grow_vertical = 2
+
+[node name="RightButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -23.0
+offset_right = -8.0
+offset_bottom = 17.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.125911, 0.125911, 0.125911, 1)
+metadata/_edit_lock_ = true
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -111.0
+offset_right = 176.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="test" type="Sprite2D" parent="."]
+position = Vector2(240, 136)
+scale = Vector2(1.9375, 1.9375)
+texture = ExtResource("1_ngt8e")
+
+[node name="test2" type="Sprite2D" parent="."]
+position = Vector2(696, 136)
+scale = Vector2(1.9375, 1.9375)
+texture = ExtResource("1_ngt8e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

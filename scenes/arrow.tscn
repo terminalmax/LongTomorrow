@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://5pjafld8k3f"]
+
+[ext_resource type="Shader" path="res://shaders/arrow.gdshader" id="1_q0aej"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vci7m"]
+shader = ExtResource("1_q0aej")
+shader_parameter/color = Color(0.752941, 0.278431, 0.45098, 1)
+shader_parameter/t = 0.1
+shader_parameter/h = 0.7
+shader_parameter/opacity = 0.8
+
+[node name="Arrow" type="Node2D"]
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(5, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Marker2D"]
+material = SubResource("ShaderMaterial_vci7m")
+offset_top = -7.0
+offset_right = 25.0
+offset_bottom = 7.0

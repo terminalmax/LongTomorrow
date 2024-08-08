@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://x2gxx5qfao4e"]
+
+[ext_resource type="Script" path="res://scripts/Globals.gd" id="1_iwof2"]
+[ext_resource type="Texture2D" uid="uid://d1fumybhbffr5" path="res://sprites/UI/MemoryUn.png" id="2_m46x7"]
+[ext_resource type="AudioStream" uid="uid://b3wob4ryilnjs" path="res://sounds/pickupCoin.wav" id="3_71ubg"]
+
+[sub_resource type="Animation" id="Animation_uv8rm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Notification:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(408, -24)]
+}
+
+[sub_resource type="Animation" id="Animation_37rpp"]
+resource_name = "unlock_animation"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Notification:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(408, -24), Vector2(408, 0), Vector2(408, 0), Vector2(408, -24)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u3dve"]
+_data = {
+"RESET": SubResource("Animation_uv8rm"),
+"unlock_animation": SubResource("Animation_37rpp")
+}
+
+[node name="Globals" type="Node"]
+process_mode = 3
+script = ExtResource("1_iwof2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Notification" type="TextureRect" parent="CanvasLayer"]
+z_index = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 408.0
+offset_top = -24.0
+offset_right = 558.0
+offset_bottom = 24.0
+grow_horizontal = 0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("2_m46x7")
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Notification"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.981916, 0.320658, 0.62816, 0.333333)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_u3dve")
+}
+
+[node name="MemoryUnlockSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_71ubg")
+volume_db = -12.0

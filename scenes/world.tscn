@@ -1,0 +1,415 @@
+[gd_scene load_steps=32 format=3 uid="uid://bpogl881qjqv4"]
+
+[ext_resource type="Script" path="res://scripts/World.gd" id="1_ixxbw"]
+[ext_resource type="Texture2D" uid="uid://dltdinfnpylho" path="res://sprites/backgrounds/day.png" id="2_hfvjv"]
+[ext_resource type="PackedScene" uid="uid://crxp3on0bw8gq" path="res://scenes/player.tscn" id="2_tnm0r"]
+[ext_resource type="FontFile" uid="uid://cvmfvcptp21rg" path="res://fonts/prstartk.ttf" id="3_jrpms"]
+[ext_resource type="Texture2D" uid="uid://q14mqelxgpe3" path="res://sprites/backgrounds/night.jpg" id="4_8fstt"]
+[ext_resource type="Texture2D" uid="uid://c7fpb38rm1kft" path="res://sprites/UI/level_indicators/Level1.png" id="4_j1hcu"]
+[ext_resource type="Texture2D" uid="uid://d2rga4c6tujqg" path="res://sprites/backgrounds/midnight.png" id="4_jv4v8"]
+[ext_resource type="Shader" path="res://shaders/transition.gdshader" id="4_xjkum"]
+[ext_resource type="Texture2D" uid="uid://1mbpfvnv2yk4" path="res://sprites/UI/level_indicators/Level22.png" id="5_3kubp"]
+[ext_resource type="Texture2D" uid="uid://cs3v0ksqwr3b5" path="res://sprites/backgrounds/sunrise.jpg" id="6_8ey1m"]
+[ext_resource type="Texture2D" uid="uid://cw7ol63ibkk3" path="res://sprites/UI/level_indicators/Level3.png" id="6_lp83i"]
+[ext_resource type="Texture2D" uid="uid://hlu1oaunachq" path="res://sprites/UI/level_indicators/Level4.png" id="7_glv34"]
+[ext_resource type="Texture2D" uid="uid://b0tp25gk6qj6g" path="res://sprites/backgrounds/morning.png" id="7_hld4d"]
+[ext_resource type="Texture2D" uid="uid://bg618nawq6j0r" path="res://sprites/UI/level_indicators/Level5.png" id="8_2xdx1"]
+[ext_resource type="Texture2D" uid="uid://4eetupt1hq7l" path="res://sprites/UI/Instructions.png" id="9_8262b"]
+[ext_resource type="AudioStream" uid="uid://de2186hqpasab" path="res://sounds/BGM1.mp3" id="16_83csq"]
+[ext_resource type="AudioStream" uid="uid://hdnqhn3ihik" path="res://sounds/hitHurt.wav" id="16_e4t6o"]
+[ext_resource type="Texture2D" uid="uid://mdttdtiehask" path="res://sprites/UI/Shift.png" id="18_kcr4f"]
+
+[sub_resource type="Animation" id="Animation_1q44w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LevelIndicators:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(256, -16)]
+}
+
+[sub_resource type="Animation" id="Animation_2kvie"]
+resource_name = "hide_level_indicator"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LevelIndicators:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(256, 24), Vector2(256, -16)]
+}
+
+[sub_resource type="Animation" id="Animation_618qm"]
+resource_name = "image_unlocked_indicator"
+
+[sub_resource type="Animation" id="Animation_2jhkg"]
+resource_name = "show_level_indicator"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LevelIndicators:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(259, -12), Vector2(259, 24)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nuj7x"]
+_data = {
+"RESET": SubResource("Animation_1q44w"),
+"hide_level_indicator": SubResource("Animation_2kvie"),
+"image_unlocked_indicator": SubResource("Animation_618qm"),
+"show_level_indicator": SubResource("Animation_2jhkg")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b1sec"]
+shader = ExtResource("4_xjkum")
+shader_parameter/amount = 0.0
+
+[sub_resource type="Animation" id="Animation_u74wi"]
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_jsk7d"]
+resource_name = "shutter_off"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/amount")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_m88qq"]
+resource_name = "shutter_on"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/amount")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aa6oj"]
+_data = {
+"RESET": SubResource("Animation_u74wi"),
+"shutter_off": SubResource("Animation_jsk7d"),
+"shutter_on": SubResource("Animation_m88qq")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pslyl"]
+size = Vector2(480, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1i8l"]
+size = Vector2(16, 304)
+
+[sub_resource type="Environment" id="Environment_fvj4t"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 0
+
+[node name="World" type="Node2D" node_paths=PackedStringArray("levels")]
+process_mode = 3
+script = ExtResource("1_ixxbw")
+levels = [NodePath("Backgrounds/Backgrounds/BG1"), NodePath("Backgrounds/Backgrounds/BG2"), NodePath("Backgrounds/Backgrounds/BG3"), NodePath("Backgrounds/Backgrounds/BG4"), NodePath("Backgrounds/Backgrounds/BG5")]
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("2_tnm0r")]
+process_mode = 1
+position = Vector2(61, 43)
+
+[node name="Spawner" type="Node" parent="."]
+process_mode = 1
+
+[node name="SpawnTimer" type="Timer" parent="Spawner"]
+wait_time = 3.0
+autostart = true
+
+[node name="SpawnArea" type="ColorRect" parent="Spawner"]
+visible = false
+offset_left = 49.0
+offset_top = 23.0
+offset_right = 395.0
+offset_bottom = 252.0
+color = Color(1, 0.176471, 0.0901961, 0.196078)
+metadata/_edit_lock_ = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 1
+layer = 2
+
+[node name="TutorialTimer" type="Timer" parent="UI"]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="LevelTimer" type="Timer" parent="UI"]
+wait_time = 20.0
+
+[node name="LevelTimerLabel" type="Label" parent="UI"]
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("3_jrpms")
+
+[node name="uianimation" type="AnimationPlayer" parent="UI"]
+libraries = {
+"": SubResource("AnimationLibrary_nuj7x")
+}
+
+[node name="LevelIndicators" type="Node2D" parent="UI"]
+position = Vector2(256, -16)
+metadata/_edit_group_ = true
+
+[node name="Level1" type="Sprite2D" parent="UI/LevelIndicators"]
+texture = ExtResource("4_j1hcu")
+
+[node name="Level2" type="Sprite2D" parent="UI/LevelIndicators"]
+visible = false
+texture = ExtResource("5_3kubp")
+
+[node name="Level3" type="Sprite2D" parent="UI/LevelIndicators"]
+visible = false
+texture = ExtResource("6_lp83i")
+
+[node name="Level4" type="Sprite2D" parent="UI/LevelIndicators"]
+visible = false
+texture = ExtResource("7_glv34")
+
+[node name="Level5" type="Sprite2D" parent="UI/LevelIndicators"]
+visible = false
+texture = ExtResource("8_2xdx1")
+
+[node name="Tutorial" type="Node2D" parent="UI"]
+position = Vector2(25, -28)
+
+[node name="Use" type="Label" parent="UI/Tutorial"]
+offset_left = 111.0
+offset_top = 125.0
+offset_right = 159.0
+offset_bottom = 148.0
+theme_override_fonts/font = ExtResource("3_jrpms")
+text = "Use"
+vertical_alignment = 1
+
+[node name="arrow" type="Sprite2D" parent="UI/Tutorial"]
+position = Vector2(186, 118)
+texture = ExtResource("9_8262b")
+region_enabled = true
+region_rect = Rect2(7, 38, 30, 20)
+
+[node name="wasd" type="Sprite2D" parent="UI/Tutorial"]
+position = Vector2(186, 146)
+texture = ExtResource("9_8262b")
+region_enabled = true
+region_rect = Rect2(7, 13, 30, 22)
+
+[node name="tomove" type="Label" parent="UI/Tutorial"]
+offset_left = 217.0
+offset_top = 125.0
+offset_right = 345.0
+offset_bottom = 148.0
+theme_override_fonts/font = ExtResource("3_jrpms")
+text = "to move."
+vertical_alignment = 1
+
+[node name="tomove2" type="Label" parent="UI/Tutorial"]
+offset_left = 217.0
+offset_top = 189.0
+offset_right = 345.0
+offset_bottom = 212.0
+theme_override_fonts/font = ExtResource("3_jrpms")
+text = "to dash."
+vertical_alignment = 1
+
+[node name="Use2" type="Label" parent="UI/Tutorial"]
+offset_left = 111.0
+offset_top = 189.0
+offset_right = 159.0
+offset_bottom = 212.0
+theme_override_fonts/font = ExtResource("3_jrpms")
+text = "Use"
+vertical_alignment = 1
+
+[node name="Instructions" type="Sprite2D" parent="UI/Tutorial"]
+position = Vector2(186, 189)
+texture = ExtResource("9_8262b")
+region_enabled = true
+region_rect = Rect2(55, 28, 36, 11)
+
+[node name="Shift" type="Sprite2D" parent="UI/Tutorial"]
+position = Vector2(186, 212)
+texture = ExtResource("18_kcr4f")
+region_enabled = true
+region_rect = Rect2(7, 66, 34, 11)
+
+[node name="Backgrounds" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="Backgrounds" type="ParallaxBackground" parent="Backgrounds"]
+layer = -3
+
+[node name="BG1" type="ParallaxLayer" parent="Backgrounds/Backgrounds"]
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(480, 0)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="BG2" type="Sprite2D" parent="Backgrounds/Backgrounds/BG1"]
+position = Vector2(240, 135.375)
+scale = Vector2(0.266667, 0.269743)
+texture = ExtResource("4_jv4v8")
+
+[node name="BG2" type="ParallaxLayer" parent="Backgrounds/Backgrounds"]
+visible = false
+motion_mirroring = Vector2(480, 0)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="BG" type="Sprite2D" parent="Backgrounds/Backgrounds/BG2"]
+position = Vector2(240, 136)
+scale = Vector2(0.6, 0.544)
+texture = ExtResource("4_8fstt")
+
+[node name="Rain" type="CPUParticles2D" parent="Backgrounds/Backgrounds/BG2"]
+position = Vector2(222, -12)
+emission_shape = 3
+emission_rect_extents = Vector2(300, 1)
+
+[node name="BG3" type="ParallaxLayer" parent="Backgrounds/Backgrounds"]
+visible = false
+motion_mirroring = Vector2(480, 0)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="BG" type="Sprite2D" parent="Backgrounds/Backgrounds/BG3"]
+position = Vector2(239.5, 136.5)
+scale = Vector2(0.565882, 0.566946)
+texture = ExtResource("6_8ey1m")
+
+[node name="BG4" type="ParallaxLayer" parent="Backgrounds/Backgrounds"]
+visible = false
+motion_mirroring = Vector2(480, 0)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="BG" type="Sprite2D" parent="Backgrounds/Backgrounds/BG4"]
+position = Vector2(240, 135.25)
+scale = Vector2(0.32967, 0.333944)
+texture = ExtResource("7_hld4d")
+
+[node name="BG5" type="ParallaxLayer" parent="Backgrounds/Backgrounds"]
+visible = false
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(480, 0)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="BG" type="Sprite2D" parent="Backgrounds/Backgrounds/BG5"]
+position = Vector2(240, 136)
+scale = Vector2(0.25, 0.251852)
+texture = ExtResource("2_hfvjv")
+
+[node name="TransitionScreen" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 3
+
+[node name="ColorRect" type="ColorRect" parent="TransitionScreen"]
+material = SubResource("ShaderMaterial_b1sec")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="transitionplayer" type="AnimationPlayer" parent="TransitionScreen"]
+libraries = {
+"": SubResource("AnimationLibrary_aa6oj")
+}
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="SpawnSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("16_e4t6o")
+volume_db = -5.0
+
+[node name="BossSFX" type="AudioStreamPlayer" parent="SFX"]
+
+[node name="BGM" type="Node" parent="."]
+
+[node name="BGM1" type="AudioStreamPlayer" parent="BGM"]
+stream = ExtResource("16_83csq")
+volume_db = -11.0
+
+[node name="WorldCollision" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollision"]
+position = Vector2(240, -9)
+shape = SubResource("RectangleShape2D_pslyl")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WorldCollision"]
+position = Vector2(240, 279.5)
+shape = SubResource("RectangleShape2D_pslyl")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldCollision"]
+position = Vector2(-8, 136)
+shape = SubResource("RectangleShape2D_w1i8l")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="WorldCollision"]
+position = Vector2(488, 136)
+shape = SubResource("RectangleShape2D_w1i8l")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fvj4t")
+
+[connection signal="is_dead" from="Player" to="." method="_on_player_is_dead"]
+[connection signal="timeout" from="Spawner/SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="UI/TutorialTimer" to="." method="_on_tutorial_timer_timeout"]
+[connection signal="timeout" from="UI/LevelTimer" to="." method="_on_level_timer_timeout"]
+[connection signal="animation_finished" from="UI/uianimation" to="." method="_on_uianimation_animation_finished"]
+[connection signal="animation_finished" from="TransitionScreen/transitionplayer" to="." method="_on_transitionplayer_animation_finished"]

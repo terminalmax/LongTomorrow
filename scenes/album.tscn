@@ -1,0 +1,278 @@
+[gd_scene load_steps=30 format=3 uid="uid://dm276lgpyxn53"]
+
+[ext_resource type="Script" path="res://scripts/album.gd" id="1_sa3u4"]
+[ext_resource type="Texture2D" uid="uid://cgafwyy02nhos" path="res://sprites/UI/Arrow.png" id="2_6femk"]
+[ext_resource type="Shader" path="res://shaders/pixelate.gdshader" id="2_io26x"]
+[ext_resource type="Texture2D" uid="uid://srsvbetvtldd" path="res://sprites/UI/CloseAlbum.png" id="3_ybptk"]
+[ext_resource type="Texture2D" uid="uid://cprhbkthviyqf" path="res://sprites/UI/unlock/Lock2.png" id="4_2rrjy"]
+[ext_resource type="FontFile" uid="uid://cvmfvcptp21rg" path="res://fonts/prstartk.ttf" id="4_c73u4"]
+[ext_resource type="Texture2D" uid="uid://c0huiimfo1ijl" path="res://sprites/UI/downs_2.png" id="4_f5eu3"]
+[ext_resource type="Texture2D" uid="uid://cgigy8d63vnma" path="res://sprites/UI/unlock/Lock1.png" id="5_8ptnc"]
+[ext_resource type="Texture2D" uid="uid://cnthwobwumabk" path="res://sprites/UI/unlock/Lock3.png" id="5_bu2do"]
+[ext_resource type="Shader" path="res://shaders/scroll.gdshader" id="5_njv71"]
+[ext_resource type="Texture2D" uid="uid://ciahur6kvfp3y" path="res://sprites/Hearts.png" id="5_v4bip"]
+[ext_resource type="Texture2D" uid="uid://cuw1ly0vb14tm" path="res://sprites/UI/unlock/Lock4.png" id="6_s17wj"]
+[ext_resource type="AudioStream" uid="uid://dxd2ut2ll8gqu" path="res://sounds/blipSelect.wav" id="7_irn6e"]
+[ext_resource type="Texture2D" uid="uid://2n7aiv0cmh5l" path="res://pictures/temp1.jpeg" id="8_avp2y"]
+[ext_resource type="Texture2D" uid="uid://db882fsl7o03k" path="res://sprites/UI/unlock/Lock5.png" id="9_bvxw8"]
+[ext_resource type="Texture2D" uid="uid://cuxe5ndeu5m3l" path="res://pictures/temp2.jpeg" id="10_1ub3x"]
+[ext_resource type="Texture2D" uid="uid://bmjpmavvcqefw" path="res://pictures/temp3.jpeg" id="12_0bccs"]
+[ext_resource type="Texture2D" uid="uid://duq7l7nlx08y8" path="res://pictures/temp4.jpeg" id="14_bbcet"]
+[ext_resource type="AudioStream" uid="uid://l0o1n4833kmt" path="res://sounds/BGM2.mp3" id="15_8jhy0"]
+[ext_resource type="Texture2D" uid="uid://dv1tvgddspgwe" path="res://pictures/pic5.jpg" id="16_ihwos"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcavf"]
+atlas = ExtResource("4_f5eu3")
+region = Rect2(7, 3, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwmfn"]
+atlas = ExtResource("4_f5eu3")
+region = Rect2(50, 3, 34, 37)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hwr1y"]
+shader = ExtResource("5_njv71")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kfj7g"]
+shader = ExtResource("2_io26x")
+shader_parameter/pixelSize = 100
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ew40d"]
+shader = ExtResource("2_io26x")
+shader_parameter/pixelSize = 200
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0mw6f"]
+shader = ExtResource("2_io26x")
+shader_parameter/pixelSize = 40
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cxp56"]
+shader = ExtResource("2_io26x")
+shader_parameter/pixelSize = 400
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g5vki"]
+shader = ExtResource("2_io26x")
+shader_parameter/pixelSize = 150
+
+[sub_resource type="Theme" id="Theme_r24bl"]
+default_font = ExtResource("4_c73u4")
+default_font_size = 8
+
+[node name="Album" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sa3u4")
+image_titles = Array[String](["Frands", "Tears (of Joy)", "Catis Familiaris", "Image the Fourth", "Long Tomorrow"])
+metadata/_edit_lock_ = true
+
+[node name="LeftButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -23.0
+offset_right = 42.0
+offset_bottom = 27.0
+grow_vertical = 2
+texture_normal = ExtResource("2_6femk")
+metadata/_edit_lock_ = true
+
+[node name="RightButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -23.0
+offset_right = 10.0
+offset_bottom = 27.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("2_6femk")
+flip_h = true
+metadata/_edit_lock_ = true
+
+[node name="BackButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 66.0
+offset_bottom = 58.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ybptk")
+stretch_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="DownloadButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 232.0
+offset_right = 97.0
+offset_bottom = 269.0
+scale = Vector2(0.5, 0.5)
+disabled = true
+texture_normal = SubResource("AtlasTexture_vcavf")
+texture_disabled = SubResource("AtlasTexture_dwmfn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -5
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = -5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.620887, 0.385211, 0.605404, 1)
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+self_modulate = Color(1, 0, 1, 0.341176)
+texture_repeat = 2
+material = SubResource("ShaderMaterial_hwr1y")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_v4bip")
+stretch_mode = 1
+
+[node name="Images" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Image1" type="Sprite2D" parent="Images"]
+material = SubResource("ShaderMaterial_kfj7g")
+position = Vector2(248, 152)
+scale = Vector2(0.191111, 0.191111)
+texture = ExtResource("8_avp2y")
+
+[node name="Lock1" type="Sprite2D" parent="Images/Image1"]
+position = Vector2(5.72205e-05, -7.98425e-05)
+scale = Vector2(5.23256, 5.23256)
+texture = ExtResource("5_8ptnc")
+
+[node name="Image2" type="Sprite2D" parent="Images"]
+visible = false
+material = SubResource("ShaderMaterial_ew40d")
+position = Vector2(248, 152)
+scale = Vector2(0.179138, 0.1825)
+texture = ExtResource("10_1ub3x")
+
+[node name="Lock2" type="Sprite2D" parent="Images/Image2"]
+position = Vector2(-0.00012207, 0)
+scale = Vector2(5.58228, 5.47945)
+texture = ExtResource("4_2rrjy")
+
+[node name="Image3" type="Sprite2D" parent="Images"]
+visible = false
+material = SubResource("ShaderMaterial_0mw6f")
+position = Vector2(248, 152)
+rotation = -1.5708
+scale = Vector2(0.346762, 0.346762)
+texture = ExtResource("12_0bccs")
+region_enabled = true
+region_rect = Rect2(0, 224, 536, 976)
+
+[node name="Lock3" type="Sprite2D" parent="Images/Image3"]
+rotation = 1.5708
+scale = Vector2(2.88382, 2.88382)
+texture = ExtResource("5_bu2do")
+
+[node name="Image4" type="Sprite2D" parent="Images"]
+visible = false
+material = SubResource("ShaderMaterial_cxp56")
+position = Vector2(240, 152)
+scale = Vector2(0.188333, 0.188333)
+texture = ExtResource("14_bbcet")
+
+[node name="Lock4" type="Sprite2D" parent="Images/Image4"]
+position = Vector2(42.4778, 0)
+scale = Vector2(5.64776, 5.64776)
+texture = ExtResource("6_s17wj")
+
+[node name="Image5" type="Sprite2D" parent="Images"]
+visible = false
+material = SubResource("ShaderMaterial_g5vki")
+position = Vector2(240, 152)
+scale = Vector2(0.0756667, 0.0756667)
+texture = ExtResource("16_ihwos")
+
+[node name="Lock5" type="Sprite2D" parent="Images/Image5"]
+position = Vector2(105.727, 0)
+scale = Vector2(13.2159, 13.2159)
+texture = ExtResource("9_bvxw8")
+
+[node name="current_picture_label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48.0
+offset_top = 16.0
+offset_right = -8.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("4_c73u4")
+theme_override_font_sizes/font_size = 8
+text = "1"
+metadata/_edit_lock_ = true
+
+[node name="total_label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = 16.0
+offset_bottom = 39.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("4_c73u4")
+theme_override_font_sizes/font_size = 8
+text = "/5"
+metadata/_edit_lock_ = true
+
+[node name="ImageTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 24.0
+offset_bottom = 39.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_c73u4")
+text = "Locked"
+metadata/_edit_lock_ = true
+
+[node name="ImageChangeSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_irn6e")
+volume_db = -11.0
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_8jhy0")
+volume_db = -25.0
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Save"
+initial_position = 2
+size = Vector2i(455, 220)
+theme = SubResource("Theme_r24bl")
+access = 2
+
+[connection signal="pressed" from="LeftButton" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="RightButton" to="." method="_on_right_button_pressed"]
+[connection signal="mouse_entered" from="BackButton" to="." method="_on_back_button_mouse_entered"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="DownloadButton" to="." method="_on_download_button_pressed"]
+[connection signal="dir_selected" from="FileDialog" to="." method="_on_file_dialog_dir_selected"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

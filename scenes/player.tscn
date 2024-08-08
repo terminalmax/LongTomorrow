@@ -1,0 +1,142 @@
+[gd_scene load_steps=15 format=3 uid="uid://crxp3on0bw8gq"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_1sa3q"]
+[ext_resource type="Shader" path="res://shaders/player_outline.gdshader" id="2_nay18"]
+[ext_resource type="Texture2D" uid="uid://bjdp7t4wkt0f3" path="res://sprites/Witch Hut [16x16] Free Assets/Characters/Witch Fly1.png" id="2_yqgeo"]
+[ext_resource type="Texture2D" uid="uid://b1ja1ysda32bc" path="res://sprites/Witch Hut [16x16] Free Assets/Characters/Witch Fly2.png" id="3_h6dc7"]
+[ext_resource type="Texture2D" uid="uid://se0h8mk7my6" path="res://sprites/Witch Hut [16x16] Free Assets/Characters/Witch Fly3.png" id="4_1ql8x"]
+[ext_resource type="Texture2D" uid="uid://bdc6w3p2vk3k2" path="res://sprites/Witch Hut [16x16] Free Assets/Characters/Witch Fly4.png" id="5_v5x2w"]
+
+[sub_resource type="Animation" id="Animation_dn8lk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.640751, 0.00190752, 0.834779, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v4kcp"]
+resource_name = "dash_ready"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.640751, 0.00190752, 0.834779, 1), Color(0.666667, 0.00392157, 0.498039, 1), Color(0.437148, 0.00243599, 0.879588, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8hq7g"]
+_data = {
+"RESET": SubResource("Animation_dn8lk"),
+"dash_ready": SubResource("Animation_v4kcp")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dl7iy"]
+shader = ExtResource("2_nay18")
+shader_parameter/color = Color(0.640751, 0.00190752, 0.834779, 1)
+shader_parameter/is_active = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cvxjh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yqgeo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_h6dc7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1ql8x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_v5x2w")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_agvu2"]
+size = Vector2(9, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pf1jo"]
+size = Vector2(5, 9.5)
+
+[sub_resource type="Gradient" id="Gradient_ojhq8"]
+offsets = PackedFloat32Array(0, 0.496552)
+colors = PackedColorArray(0.773224, 0.00189, 0.937237, 1, 0, 0, 0, 0)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 2
+motion_mode = 1
+platform_on_leave = 2
+script = ExtResource("1_1sa3q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8hq7g")
+}
+autoplay = "dash_ready"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_dl7iy")
+sprite_frames = SubResource("SpriteFrames_cvxjh")
+animation = &"flying"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_agvu2")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0.5, 1.75)
+shape = SubResource("RectangleShape2D_pf1jo")
+debug_color = Color(0.819112, 0.333973, 0.590045, 0.42)
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="DashTrail" type="CPUParticles2D" parent="."]
+emitting = false
+lifetime = 0.2
+one_shot = true
+texture = ExtResource("2_yqgeo")
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+color = Color(0.864675, 0.864675, 0.864675, 1)
+color_ramp = SubResource("Gradient_ojhq8")
+
+[node name="DashSFX" type="AudioStreamPlayer" parent="."]
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dashtimer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_end"]

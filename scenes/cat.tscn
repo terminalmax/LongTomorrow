@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjgae12m4lg7c"]
+
+[ext_resource type="Texture2D" uid="uid://cmcgjvpgewjw1" path="res://sprites/Witch Hut [16x16] Free Assets/Characters/Cat1.png" id="1_cgg1a"]
+[ext_resource type="Texture2D" uid="uid://bynuxd6sdct2u" path="res://sprites/Witch Hut [16x16] Free Assets/Characters/Cat2.png" id="2_srs3l"]
+[ext_resource type="Texture2D" uid="uid://dxxsrtvnrubht" path="res://sprites/Witch Hut [16x16] Free Assets/Characters/Cat3.png" id="3_n5k14"]
+[ext_resource type="Texture2D" uid="uid://bx4qeqv0oa30r" path="res://sprites/Witch Hut [16x16] Free Assets/Characters/Cat4.png" id="4_3c1eu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xfxi8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cgg1a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_srs3l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_n5k14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3c1eu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="cat" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_xfxi8")
+autoplay = "default"
+frame_progress = 0.344487

@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://864taafwf4ln"]
+
+[ext_resource type="PackedScene" uid="uid://djeh4goq5lmas" path="res://scenes/obstacle.tscn" id="1_6hpax"]
+[ext_resource type="Shader" path="res://shaders/telegraph_shader.gdshader" id="2_1ut6f"]
+[ext_resource type="Texture2D" uid="uid://t7wxdg8olivk" path="res://sprites/obstacles/Ghost.png" id="2_5nper"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lyavb"]
+resource_local_to_scene = true
+shader = ExtResource("2_1ut6f")
+shader_parameter/color = Color(0.713726, 0, 0.278431, 1)
+shader_parameter/is_active = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p71ph"]
+size = Vector2(6, 8)
+
+[node name="Ghost" instance=ExtResource("1_6hpax")]
+
+[node name="Sprite2D" parent="." index="1"]
+material = SubResource("ShaderMaterial_lyavb")
+position = Vector2(2, 0)
+texture = ExtResource("2_5nper")
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_p71ph")

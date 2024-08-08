@@ -1,0 +1,91 @@
+[gd_scene load_steps=14 format=3 uid="uid://ccgsw584ilci4"]
+
+[ext_resource type="Texture2D" uid="uid://dboatpi3a14h7" path="res://sprites/Reaper (Animated Pixel Art)/Animation Sprite Sheets (PNG)/HostileRunningReaper-Sheet.png" id="1_6qa1c"]
+[ext_resource type="Script" path="res://scripts/reaper.gd" id="1_paiqq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ylgk7"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fq6xw"]
+size = Vector2(16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcli4"]
+atlas = ExtResource("1_6qa1c")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmcfd"]
+atlas = ExtResource("1_6qa1c")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67y24"]
+atlas = ExtResource("1_6qa1c")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwx3i"]
+atlas = ExtResource("1_6qa1c")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7blq"]
+atlas = ExtResource("1_6qa1c")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lalog"]
+atlas = ExtResource("1_6qa1c")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8l0fh"]
+atlas = ExtResource("1_6qa1c")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqbro"]
+atlas = ExtResource("1_6qa1c")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rfhmu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcli4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmcfd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67y24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwx3i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7blq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lalog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8l0fh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqbro")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Reaper" type="RigidBody2D" groups=["obstacle"]]
+collision_layer = 4
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_ylgk7")
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_paiqq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fq6xw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rfhmu")
+autoplay = "default"
+frame_progress = 0.868672
